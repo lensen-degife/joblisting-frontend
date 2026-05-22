@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import api from '../api/axios';
-import { Post } from '../types';
+import type { Post } from '../types';     // ← Changed to "import type"
 import { Search, Clock } from 'lucide-react';
 
 export default function JobList() {

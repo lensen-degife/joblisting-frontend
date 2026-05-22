@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import api from '../api/axios';
-import { Post } from '../types';
+import type { Post } from '../types';     // ← Changed to "import type"
 import { useNavigate } from 'react-router-dom';
 
 export default function PostJob() {
