@@ -31,7 +31,6 @@ export default function JobList() {
     fetchJobs();
   }, []);
 
-  // Real-time filtering using only backend fields
   useEffect(() => {
     if (!searchTerm.trim()) {
       setFilteredJobs(jobs);
@@ -48,76 +47,117 @@ export default function JobList() {
   }, [searchTerm, jobs]);
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Hero */}
-      <div className="bg-gradient-to-br from-blue-600 to-indigo-700 text-white py-16">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <h1 className="text-5xl font-bold mb-4">Find Your Next Job</h1>
-          <p className="text-blue-100 text-xl">Search through available positions</p>
-        </div>
+    <div style={{ minHeight: '100vh', backgroundColor: '#f8fafc', fontFamily: 'system-ui, sans-serif' }}>
+      {/* Hero Section */}
+      <div style={{
+        background: 'linear-gradient(to right, #2563eb, #4f46e5)',
+        color: 'white',
+        padding: '80px 20px',
+        textAlign: 'center'
+      }}>
+        <h1 style={{ fontSize: '42px', fontWeight: 'bold', marginBottom: '16px' }}>
+          Find Your Next Job
+        </h1>
+        <p style={{ fontSize: '20px', opacity: 0.9 }}>Search through available positions</p>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 -mt-8 pb-12">
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px 20px' }}>
         {/* Search Bar */}
-        <form className="mb-10">
-          <div className="relative max-w-3xl mx-auto">
-            <Search className="absolute left-6 top-5 text-gray-400" size={24} />
+        <div style={{ maxWidth: '800px', margin: '0 auto 40px' }}>
+          <div style={{ position: 'relative' }}>
+            <Search style={{ position: 'absolute', left: '24px', top: '20px', color: '#9ca3af' }} size={24} />
             <input
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search by role, skill, or experience..."
-              className="w-full pl-16 pr-6 py-5 text-lg bg-white border border-gray-200 rounded-3xl focus:outline-none focus:border-blue-500 shadow-xl"
+              style={{
+                width: '100%',
+                padding: '20px 20px 20px 64px',
+                fontSize: '18px',
+                border: '1px solid #e2e8f0',
+                borderRadius: '9999px',
+                boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+                outline: 'none'
+              }}
             />
           </div>
-        </form>
-
-        {/* Results Info */}
-        <div className="flex justify-between mb-8 text-gray-600">
-          <p>{filteredJobs.length} jobs found</p>
         </div>
 
-        {/* Jobs Grid */}
+        {/* Results Count */}
+        <p style={{ marginBottom: '24px', color: '#64748b', fontSize: '18px' }}>
+          {filteredJobs.length} jobs found
+        </p>
+
+        {/* Loading */}
         {loading ? (
-          <div className="text-center py-20">
-            <div className="animate-spin w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full mx-auto"></div>
-            <p className="mt-4 text-gray-500">Loading opportunities...</p>
+          <div style={{ textAlign: 'center', padding: '80px 20px' }}>
+            <div style={{
+              width: '48px',
+              height: '48px',
+              border: '5px solid #e2e8f0',
+              borderTop: '5px solid #2563eb',
+              borderRadius: '50%',
+              animation: 'spin 1s linear infinite',
+              margin: '0 auto 20px'
+            }}></div>
+            <p>Loading opportunities...</p>
           </div>
         ) : filteredJobs.length === 0 ? (
-          <div className="text-center py-20 text-gray-400">
+          <div style={{ textAlign: 'center', padding: '80px', color: '#94a3b8', fontSize: '20px' }}>
             No matching jobs found
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))',
+            gap: '28px'
+          }}>
             {filteredJobs.map((job, index) => (
-              <div 
-                key={index}
-                className="bg-white rounded-3xl p-8 border border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300"
+              <div key={index} style={{
+                backgroundColor: 'white',
+                borderRadius: '24px',
+                padding: '32px',
+                border: '1px solid #e2e8f0',
+                transition: 'all 0.3s'
+              }}
+                onMouseOver={(e) => e.currentTarget.style.boxShadow = '0 20px 25px -5px rgb(0 0 0 / 0.1)'}
+                onMouseOut={(e) => e.currentTarget.style.boxShadow = 'none'}
               >
-                <h3 className="text-2xl font-semibold text-gray-900 mb-3">
+                <h3 style={{ fontSize: '24px', fontWeight: '600', marginBottom: '16px' }}>
                   {job.profile}
                 </h3>
 
-                <p className="text-gray-600 line-clamp-4 mb-6 min-h-[100px]">
+                <p style={{
+                  color: '#475569',
+                  lineHeight: '1.6',
+                  marginBottom: '24px',
+                  minHeight: '110px',
+                  display: '-webkit-box',
+                  WebkitLineClamp: 4,
+                  WebkitBoxOrient: 'vertical',
+                  overflow: 'hidden'
+                }}>
                   {job.desc}
                 </p>
 
-                {/* Experience */}
                 {job.exp && (
-                  <div className="flex items-center gap-2 text-sm text-gray-500 mb-6">
-                    <Clock size={18} />
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '24px', color: '#64748b' }}>
+                    <Clock size={20} />
                     <span>{job.exp} years experience</span>
                   </div>
                 )}
 
-                {/* Tech Stack */}
                 {job.techs && job.techs.length > 0 && (
-                  <div className="flex flex-wrap gap-2">
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '32px' }}>
                     {job.techs.map((tech, i) => (
-                      <span 
-                        key={i}
-                        className="px-4 py-1.5 bg-blue-50 text-blue-700 text-sm rounded-2xl font-medium"
-                      >
+                      <span key={i} style={{
+                        backgroundColor: '#eff6ff',
+                        color: '#1e40af',
+                        padding: '8px 16px',
+                        borderRadius: '9999px',
+                        fontSize: '14px'
+                      }}>
                         {tech}
                       </span>
                     ))}
@@ -126,7 +166,18 @@ export default function JobList() {
 
                 <button 
                   onClick={() => alert(`Applied for: ${job.profile}`)}
-                  className="mt-8 w-full bg-blue-600 hover:bg-blue-700 text-white py-3.5 rounded-2xl font-medium transition"
+                  style={{
+                    width: '100%',
+                    backgroundColor: '#2563eb',
+                    color: 'white',
+                    padding: '16px',
+                    borderRadius: '9999px',
+                    fontWeight: '600',
+                    border: 'none',
+                    cursor: 'pointer'
+                  }}
+                  onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#1d4ed8'}
+                  onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#2563eb'}
                 >
                   Apply Now
                 </button>
@@ -135,6 +186,12 @@ export default function JobList() {
           </div>
         )}
       </div>
+
+      <style>{`
+        @keyframes spin {
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
     </div>
   );
 }
