@@ -2,6 +2,7 @@ import { useState } from 'react';
 import api from '../api/axios';
 import type { Post } from '../types';     // ← Changed to "import type"
 import { useNavigate } from 'react-router-dom';
+import { Search } from 'lucide-react';
 
 export default function PostJob() {
   const navigate = useNavigate();
@@ -108,6 +109,13 @@ export default function PostJob() {
             ))}
           </div>
         </div>
+        <button 
+  type="submit"
+  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-2xl font-medium flex items-center gap-2 transition-all"
+>
+  <Search size={20} />
+  Search
+</button>
 
         <button
           type="submit"

@@ -8,29 +8,31 @@ export default function JobList() {
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
 
-  const fetchJobs = async (query = '') => {
-    setLoading(true);
-    try {
-      // Backend compatible endpoints
-      const url = query 
-        ? `/posts/search?query=${encodeURIComponent(query)}` 
-        : '/allPosts';
-      
-      const res = await api.get(url);
-      setJobs(Array.isArray(res.data) ? res.data : []);
-    } catch (err) {
-      console.error("Failed to fetch jobs:", err);
-      // Fallback: try alternative endpoint if needed
-      try {
-        const fallback = await api.get('/posts');
-        setJobs(Array.isArray(fallback.data) ? fallback.data : []);
-      } catch (fallbackErr) {
-        console.error("All attempts failed", fallbackErr);
-      }
-    } finally {
-      setLoading(false);
+const fetchJobs = async (query = '') => {
+  setLoading(true);
+  try {
+    let url = '/allPosts';
+    
+    if (query) {
+      url = `/posts/${encodeURIComponent(query)}`;   // ← Changed to match backend
     }
-  };
+
+    const res = await api.get(url);
+    setJobs(Array.isArray(res.data) ? res.data : []);
+  } catch (err) {
+    console.error("Failed to fetch jobs:", err);
+    
+    // Fallback for debugging
+    try {
+      const fallback = await api.get('/allPosts');
+      setJobs(Array.isArray(fallback.data) ? fallback.data : []);
+    } catch (e) {
+      console.error("Fallback also failed", e);
+    }
+  } finally {
+    setLoading(false);
+  }
+};
 
   useEffect(() => {
     fetchJobs();
