@@ -13,8 +13,8 @@ export default function JobList() {
     setLoading(true);
     try {
       const url = query 
-        ? `/posts/${encodeURIComponent(query)}`
-        : '/allPosts';
+        ? `api/posts/${encodeURIComponent(query)}`
+        : 'api/allPosts';
       
       const res = await api.get(url);
       const data = Array.isArray(res.data) ? res.data : [];
