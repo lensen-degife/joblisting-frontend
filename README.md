@@ -1,73 +1,136 @@
-# React + TypeScript + Vite
+# JobListing Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Modern and responsive frontend for the Job Listing platform built with React + TypeScript.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This repository contains the frontend application for the Job Listing platform.
 
-## React Compiler
+### Backend Repository
+[JobListing Backend](https://github.com/lensen-degife/JobListing-backend)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- React 18
+- TypeScript
+- Vite
+- Axios
+- Tailwind CSS
+- React Query / Zustand
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Features
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Browse available jobs
+- Search and filter jobs
+- Responsive UI design
+- View detailed job information
+- User authentication interface
+- Submit job applications
+- Clean and modern user experience
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+Make sure you have installed:
+
+- Node.js 18+
+- npm or yarn
+
+---
+
+## Installation
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/lensen-degife/joblisting-frontend.git
+cd joblisting-frontend
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Install dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+### 3. Configure environment variables
+
+Create a `.env` file in the project root:
+
+```env
+VITE_API_URL=http://localhost:8080
+```
+
+### 4. Start the development server
+
+```bash
+npm run dev
+```
+
+---
+
+## API Configuration
+
+Example API setup:
+
+```ts
+// src/services/api.ts
+
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+```
+
+---
+
+## Project Structure
+
+```text
+src/
+├── components/
+├── pages/
+├── services/
+├── types/
+├── utils/
+└── assets/
+```
+
+---
+
+## Recommended Development Workflow
+
+1. Start the backend server
+
+```bash
+./mvnw spring-boot:run
+```
+
+2. Start the frontend server
+
+```bash
+npm run dev
+```
+
+3. Open the frontend in your browser
+
+```text
+http://localhost:5173
+```
+
+---
+
+## Future Improvements
+
+- Dark mode
+- Saved jobs
+- Pagination
+- Advanced filtering
+- Admin dashboard
+- Real-time notifications
+
+---
