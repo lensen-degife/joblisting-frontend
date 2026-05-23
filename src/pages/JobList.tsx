@@ -98,9 +98,7 @@ export default function JobList() {
                     <h3 className="text-2xl font-semibold text-gray-900 mb-1 line-clamp-2">
                       {job.profile || "Software Engineer"}
                     </h3>
-                    <p className="text-gray-500 font-medium">
-                      {job.company || "Unknown Company"}
-                    </p>
+                 
                   </div>
                   <span className="px-4 py-1.5 bg-emerald-100 text-emerald-700 text-xs font-semibold rounded-2xl whitespace-nowrap">
                     NEW
@@ -111,17 +109,7 @@ export default function JobList() {
                   {job.desc || "No description available"}
                 </p>
 
-                {/* Skills */}
-                <div className="flex flex-wrap gap-2 mb-8">
-                  {(job.skills || ["React", "Node.js", "TypeScript"]).slice(0, 4).map((skill: string, i: number) => (
-                    <span
-                      key={i}
-                      className="px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 text-sm font-medium rounded-2xl transition cursor-default"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
+          
 
                 {/* Footer */}
                 <div className="pt-6 border-t flex items-center justify-between text-sm text-gray-500">
